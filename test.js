@@ -33,5 +33,30 @@ function solution(n, arr1, arr2) {
     return answer;
 }
 
-solution(5, [9, 20, 28, 18, 11], [30, 1, 21, 17, 28]);
-solution(6, [46, 33, 33 ,22, 31, 50], [27 ,56, 19, 14, 14, 10]);
+function solution2(n) {
+    var step1 = String(n);
+    console.log(typeof(step1));
+    var step2 = [];
+    for(let i = 0; i < step1.length; i++){
+        step2[i] = step1.substr(i, 1);
+    }
+    console.log(step2);
+    var answer = step2.reverse();
+    console.log(answer);
+    return answer;
+}
+
+function solution3(n, lost, reserve) {
+    
+    var answer = n - lost.length;
+
+    for(let i = 0; i < n; i++){
+        lost[i]
+    }
+
+    console.log(answer);
+    return answer;
+}
+
+solution3(5, [2, 4], [1, 3, 5]);
+solution3(5, [2, 4], [3]);
