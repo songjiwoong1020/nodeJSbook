@@ -58,5 +58,71 @@ function solution3(n, lost, reserve) {
     return answer;
 }
 
-solution3(5, [2, 4], [1, 3, 5]);
-solution3(5, [2, 4], [3]);
+function solution4(answers) {
+    
+    var answer = [];
+    
+    let supo2 = [];
+    let supo3 = [];
+    let score1 = 0;
+    let score2 = 0;
+    let score3 = 0;
+    for(let i = 0; i < answers.length; i++){
+        
+        var Tlqkf = [ , 1, ,3 , , 4, , 5];
+        if(i%2 === 0){
+            supo2[i] = 2;
+        } else {
+            supo2[i] = Tlqkf[i%8];
+        }
+
+        if(i%10 === 0 || i%10 === 1){
+            supo3[i] = 3;
+        } else if(i%10 === 2 || i%10 === 3) {
+            supo3[i] = 1;
+        } else if(i%10 === 4 || i%10 === 5){
+            supo3[i] = 2;
+        } else if(i%10 === 6 || i%10 === 7){
+            supo3[i] = 4;
+        } else {
+            supo3[i] = 5;
+        }
+        
+        
+        if(answers[i] === (i%5)+1){
+            score1++;
+        }
+        if(answers[i] === supo2[i]){
+            score2++;
+        }
+        if(answers[i] === supo3[i]){
+            score3++;
+        }
+    }
+    if (score1 === score2 && score2 === score3) {
+        answer[0] = 1;
+        answer[1] = 2;
+        answer[2] = 3;
+    } else if(score1 > score2 && score1 > score3){
+        answer[0] = 1;
+    } else if (score2 > score3){
+        answer[0] = 2;
+    } else if(score1 === score2){
+        answer[0] = 1;
+        answer[1] = 2;
+    } else if (score1 === score3){
+        answer[0] = 1;
+        answer[1] = 3;
+    } else if (score2 === score3){
+        answer[0] = 2;
+        answer[1] = 3;
+    } else {
+        answer[0] = 3;
+    }
+
+    console.log(supo2);
+    return answer;
+}
+solution4([1, 2, 3, 4, 5]);
+solution4([1, 3, 2, 4, 2]);
+solution4([1, 3, 2, 4, 2, 1, 3, 2, 4, 2, 1, 3, 2, 4, 2, 1, 3, 2, 4, 2]);
