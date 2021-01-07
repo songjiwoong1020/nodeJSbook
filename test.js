@@ -123,6 +123,65 @@ function solution4(answers) {
     console.log(supo2);
     return answer;
 }
-solution4([1, 2, 3, 4, 5]);
-solution4([1, 3, 2, 4, 2]);
-solution4([1, 3, 2, 4, 2, 1, 3, 2, 4, 2, 1, 3, 2, 4, 2, 1, 3, 2, 4, 2]);
+// solution4([1, 2, 3, 4, 5]);
+// solution4([1, 3, 2, 4, 2]);
+// solution4([1, 3, 2, 4, 2, 1, 3, 2, 4, 2, 1, 3, 2, 4, 2, 1, 3, 2, 4, 2]);
+
+function sol(n){
+    let count = 0;
+    let isPrime = true;
+    for(let i = 2; i <= n; i++){
+        for(let j = 2; j <= n; j++){
+            if(i%j === 0 && i !== j){
+                isPrime = false;
+                break;
+            }
+        }
+        if(isPrime){
+            count ++;
+        }
+        isPrime = true;
+    }
+    console.log(count);
+    return count;
+}
+
+function solution5(arr, divisor) {
+    var answer = [];
+    for(let i = 0; i < arr.length; i++){
+        if(arr[i]%divisor === 0){
+            answer.push(arr[i]);
+        }
+    }
+    if(answer.length === 0){
+        answer.push(-1);
+    } else {
+        answer.sort(function(a, b){
+            return a - b;
+        });
+    }
+    console.log(answer);
+    return answer;
+}
+
+
+
+
+function skillTrees(skill, skill_trees) {
+    var answer = 0;
+
+    for(let i = 0; i < skill_trees.length; i++){
+        let userSkill = skill_trees[i];
+        let arr = [];
+        for(let j in skill){
+            arr[j] = userSkill.indexOf(skill[j]);
+        }
+        console.log(arr);
+    }
+
+
+
+    return answer;
+}
+
+skillTrees("CBD", ["BACDE", "CBADF", "AECB", "BDA"]);
