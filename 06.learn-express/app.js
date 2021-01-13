@@ -8,8 +8,12 @@ const bodyParser = require('body-parser');
 
 //dotenv 사용부분. .env내용을 process.env에 넣어준다.
 dotenv.config();
+const indexRouter = require('./routes');
+const userRouter = require('./routes/user');
 const app = express();
 app.set('port', process.env.PORT || 3000);
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
 
 //morgan 사용부분. 요청에 대한 응답과 정보를 콘솔에 기록한다. dev는 개발모드이다.
 app.use(morgan('dev'));
@@ -68,15 +72,21 @@ app.post('/upload', upload.single('image'), (req, res) => {
   });
   
 
+// app.use((req, res, next) => {
+//     console.log('모든 요청에 다 실행됩니다.');
+//     next();
+// });
+// app.get('/', (req, res, next) => {
+//     console.log('GET / 요청에서만 실행됩니다.');
+//     next();
+// }, (req, res) => {
+//     throw new Error('에러는 에러 처리 미들웨어로 갑니다.');
+// });
+app.use('/', indexRouter);
+app.use('/user', userRouter);
+
 app.use((req, res, next) => {
-    console.log('모든 요청에 다 실행됩니다.');
-    next();
-});
-app.get('/', (req, res, next) => {
-    console.log('GET / 요청에서만 실행됩니다.');
-    next();
-}, (req, res) => {
-    throw new Error('에러는 에러 처리 미들웨어로 갑니다.');
+    res.status(404).send('Not found');
 });
 
 app.use((err, req, res, next) => {
