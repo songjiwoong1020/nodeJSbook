@@ -5,6 +5,7 @@ const session = require('express-session');
 const dotenv = require('dotenv');
 const path = require('path');
 const bodyParser = require('body-parser');
+const nunjucks = require('nunjucks');
 
 //dotenv 사용부분. .env내용을 process.env에 넣어준다.
 dotenv.config();
@@ -12,8 +13,12 @@ const indexRouter = require('./routes');
 const userRouter = require('./routes/user');
 const app = express();
 app.set('port', process.env.PORT || 3000);
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+//app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'html');
+nunjucks.configure('views', {
+    express: app,
+    watch: true,
+  });
 
 //morgan 사용부분. 요청에 대한 응답과 정보를 콘솔에 기록한다. dev는 개발모드이다.
 app.use(morgan('dev'));
@@ -86,12 +91,19 @@ app.use('/', indexRouter);
 app.use('/user', userRouter);
 
 app.use((req, res, next) => {
-    res.status(404).send('Not found');
+    const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
+    error.status = 404;
+    next(error);
+    //res.status(404).send('Not found');
 });
 
 app.use((err, req, res, next) => {
-    console.error(err);
-    res.status(500).send(err.message);
+    // console.error(err);
+    // res.status(500).send(err.message);
+    res.locals.message = err.message;
+    res.locals.error = process.env.NODE_ENV !== 'production' ? err : {};
+    res.status(err.status || 500);
+    res.render('error');
 });
 
 app.listen(app.get('port'), () => {
