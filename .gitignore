@@ -5,3 +5,4 @@
 /06.learn-express/.env
 /07.learn-sequelize/node_modules
 /07.learn-sequelize/config/config.json
+/08.learn-mongoose/node_modules
