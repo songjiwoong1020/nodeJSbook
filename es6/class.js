@@ -24,3 +24,31 @@ Zero.prototype.sayName = function(){
 
 var oldZero = new Zero('human', 'Zero', 'Cho');
 Human.isHuman(oldZero);
+
+class Human2 {
+    constructor(type = 'human'){
+        this.type = type;
+    }
+    static isHuman2(human){
+        return human instanceof Human2;
+    }
+    breathe(){
+        alert('h-a-a-a-m');
+    }
+}
+
+class Zero extends Human2{
+    constructor(type, firstName, lastName){
+        super(type);
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    sayName(){
+        super.breathe();
+        alert(`${this.firstName} ${this.lastName}`);
+    }
+}
+
+const newZero = new Zero('human', 'Zero', 'cho');
+Human2.isHuman2(newZero);
