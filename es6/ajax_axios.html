@@ -20,4 +20,18 @@
             console.error(error);
         }
     })();
+
+    //post
+    (async () => {
+        try{
+            const result2 = await axios.post('https://unpkg.com/axios/dist/axios.min.js', {
+                name : 'zerocho',
+                birth : 1994
+            });
+            console.log(result2);
+            console.log(result2.data);
+        } catch(error){
+            console.error(error);
+        }
+    })();
 </script>
