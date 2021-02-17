@@ -1,3 +1,10 @@
+/*
+프로미스는 기존 콜백의 문제점(콜백이 꼬리에꼬리를무는 콜백지옥)을 극복.
+사용법
+1.프로미스 객체를 생성. 내부에 resolve와 reject를 매개변수로 갖는 콜백 함수를 넣음.
+2.이렇게 만든 프로미스 변수에는 then과 catch메서드를 붙일 수 있으며 프로미스 내부에서
+    resolve가 호출되면 then이, reject가 호출되면 catch가 실행됨.
+*/
 const condition = true;
 const promise = new Promise((resolve, reject) => {
     if(condition){
