@@ -48,3 +48,24 @@ const relationship2 = {
     },
 };
 relationship2.logFriends();
+
+/*
+기존 JS this의 이해를 공부하려다 노드는 또 무언가 다르다..
+*/
+var globalVar = 100;
+function conflict(globalVar){
+    this.globalVar = globalVar * 2;
+    console.log(`함수 안 globalVar=${globalVar}`);
+    console.log(`함수 안 this.globalVar=${this.globalVar}`);
+}
+conflict(globalVar);
+console.log(`함수 밖 globalVar=${globalVar}`);
+
+function conflict2(localVar){
+    globalVar = localVar + 50;
+    localVar = localVar + 80;
+    console.log(`함수2 안 globalVar=${globalVar}`);
+    console.log(`함수2 안 localVar=${localVar}`);
+}
+conflict2(globalVar);
+console.log(`함수2 밖 globalVar=${globalVar}`);
