@@ -10,6 +10,10 @@ module.exports = {
     even
 };
 
+/*
+3.4.5 module, exports, require
+module객체 말고 exports객체로도 모듈생성 가능.
+동일하게 동작하는 이유는 module.exports와 exports가 같은 객체를 참조하기 때문임.
+*/
 // exports.odd = '홀수입니다';
 // exports.even = '짝수입니다';
-// 이것도 가능함.
